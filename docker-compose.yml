@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: chatbot_app
+    ports:
+      - "5000:5000"  # Expõe a porta 5000 para a aplicação Flask
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Passa a chave da OpenAI do arquivo .env
+      - MONGO_URI=${MONGO_URI}  # Passa a URI do MongoDB
+      - REDIS_HOST=${REDIS_HOST}  # Passa o host Redis
+      - REDIS_PORT=${REDIS_PORT}  # Passa a porta Redis
+      - REDIS_DB=${REDIS_DB}  # Passa o banco Redis
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - .:/app
+    networks:
+      - chatbot_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - chatbot_network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - chatbot_network
+
+networks:
+  chatbot_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
