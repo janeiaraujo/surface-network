@@ -25,3 +25,5 @@ uvicorn==0.22.0
 pymongo==4.5.0
 redis==4.6.0
 openai==0.27.0
+transformers==4.30.2
+tensorflow==2.10.0

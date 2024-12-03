@@ -19,15 +19,7 @@ O Surface-Network é uma inteligência artificial totalmente autônoma, projetad
 ````
 surface-network/
 │
-├── app/
-│   ├── main.py               # Arquivo principal da aplicação Flask
-│   ├── models/               # Modelos para NLP e aprendizado
-│   ├── utils/                # Funções auxiliares
-│   ├── static/               # Arquivos estáticos (CSS, JS)
-│   └── templates/            # Templates HTML para a interface web (opcional)
-│
-├── data/
-│   └── datasets/             # Datasets públicos para o pré-treinamento
+|── main.py                   # Arquivo principal da aplicação Flask
 │
 ├── Dockerfile                # Dockerfile para construção do contêiner
 ├── docker-compose.yml        # Arquivo de configuração do Docker Compose
@@ -73,7 +65,11 @@ Você pode fazer requisições POST para o endpoint /ask:
 
 ````
 
-curl -X POST http://localhost:5000/ask -H "Content-Type: application/json" -d '{"question": "Qual é a capital da França?"}'
+curl --location 'http://35.169.140.52:5000/perguntar/' \
+--header 'Content-Type: application/json' \
+--data '{
+    "pergunta": "Qual é a capital da Belgica? "
+}'
 ````
 
 Feedback
